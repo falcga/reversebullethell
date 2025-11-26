@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -20,6 +21,7 @@ public class Main extends Game {
     public SpriteBatch batch;
     public OrthographicCamera camera;
     public World world;
+    public Vector3 touch;
 
 
     @Override
@@ -31,6 +33,7 @@ public class Main extends Game {
         camera.setToOrtho(false, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
         GameScreen gameScreen = new GameScreen(this);
         setScreen(gameScreen);
+
 
     }
 

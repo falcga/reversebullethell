@@ -20,8 +20,8 @@ public class GameObject {
         this.width = width;
         this.height = height;
 
-        Texture texture = new Texture(texturePath);
-        Body body = createBody(x, y, world);
+        texture = new Texture(texturePath);
+        body = createBody(x, y, world);
     }
     private Body createBody(float x, float y, World world) {
         BodyDef def = new BodyDef(); // def - defenition (определение) это объект, который содержит все данные, необходимые для посторения тела
