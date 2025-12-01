@@ -16,13 +16,15 @@ import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.ShipObje
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.TrashObject;
 
 public class GameScreen implements Screen {
+    GameSession gameSession;
     Main main;
     ShipObject shipObject;
     ArrayList<TrashObject> trashArray;
-    private GameSession gameSession;
+
 
     public GameScreen(Main main) {
         this.main = main;
+        gameSession = new GameSession();
         trashArray = new ArrayList<>();
         shipObject = new ShipObject(
             GameSettings.SCREEN_WIDTH / 2, 150,
@@ -74,12 +76,22 @@ public class GameScreen implements Screen {
             );
             trashArray.add(trashObject);
         }
-
+/*
+        if (shipObject.needToShoot()) {
+            BulletObject laserBullet = new BulletObject(
+                shipObject.getX(), shipObject.getY() + shipObject.height / 2,
+                GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                GameResources.BULLET_IMG_PATH,
+                myGdxGame.world
+            );
+            bulletArray.add(laserBullet);
+        }
+*/
         updateTrash();
+//       updateBullets();
 
         draw();
     }
-
     private void handleInput() {
         if (Gdx.input.isTouched()) {
             main.touch = main.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
