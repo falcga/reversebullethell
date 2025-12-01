@@ -13,12 +13,14 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GameObject {
     public final int height;
     public final int width;
+    private final short cBits;
 
     public Body body;
     Texture texture;
-    GameObject(String texturePath, int x, int y, int width, int height, World world) {
+    GameObject(String texturePath, int x, int y, int width, int height, short cBits, World world) {
         this.width = width;
         this.height = height;
+        this.cBits = cBits;
 
         texture = new Texture(texturePath);
         body = createBody(x, y, world);
@@ -33,6 +35,7 @@ public class GameObject {
         CircleShape circleShape = new CircleShape(); // задаём коллайдер в форме круга
         int width = 0;
         int height = 0;
+
         circleShape.setRadius(Math.max(width, height) * SCALE / 2f); // определяем радиус круга коллайдера
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -60,6 +63,9 @@ public class GameObject {
 
     public void setY(int y) {
         body.setTransform(body.getPosition().x, y * SCALE, 0);
+    }
+    public void hit() {
+        // all physics objects could be hit
     }
 
     public void draw(SpriteBatch batch) {

@@ -8,10 +8,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.ContactManager;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameResources;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSession;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSettings;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.Main;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.BulletObject;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.ShipObject;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.TrashObject;
 
@@ -20,23 +22,29 @@ public class GameScreen implements Screen {
     Main main;
     ShipObject shipObject;
     ArrayList<TrashObject> trashArray;
-
+    ArrayList<BulletObject> bulletArray;
+    ContactManager contactManager;
 
     public GameScreen(Main main) {
         this.main = main;
         gameSession = new GameSession();
+        contactManager = new ContactManager(main.world);
+
         trashArray = new ArrayList<>();
+        bulletArray = new ArrayList<>();
         shipObject = new ShipObject(
             GameSettings.SCREEN_WIDTH / 2, 150,
             GameSettings.SHIP_WIDTH, GameSettings.SHIP_HEIGHT,
             GameResources.SHIP_IMG_PATH,
             main.world
         );
+
         System.out.println("WHAT");
     }
 
     @Override
     public void show() {
+        gameSession.startGame();
     }
 
     @Override
@@ -76,19 +84,19 @@ public class GameScreen implements Screen {
             );
             trashArray.add(trashObject);
         }
-/*
+
         if (shipObject.needToShoot()) {
             BulletObject laserBullet = new BulletObject(
                 shipObject.getX(), shipObject.getY() + shipObject.height / 2,
                 GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
                 GameResources.BULLET_IMG_PATH,
-                myGdxGame.world
+                main.world
             );
             bulletArray.add(laserBullet);
         }
-*/
+
         updateTrash();
-//       updateBullets();
+        updateBullets();
 
         draw();
     }
@@ -108,6 +116,7 @@ public class GameScreen implements Screen {
         main.batch.begin();
         shipObject.draw(main.batch);
         for (TrashObject trash : trashArray) trash.draw(main.batch);
+        for (BulletObject bullet : bulletArray) bullet.draw(main.batch);
         main.batch.end();
     }
     private void updateTrash() {
@@ -115,6 +124,15 @@ public class GameScreen implements Screen {
             if (!trashArray.get(i).isInFrame()) {
                 main.world.destroyBody(trashArray.get(i).body);
                 trashArray.remove(i--);
+            }
+        }
+    }
+    private void updateBullets() {
+        System.out.println("size: " + bulletArray.size());
+        for (int i = 0; i < bulletArray.size(); i++) {
+            if (bulletArray.get(i).hasToBeDestroyed()) {
+                main.world.destroyBody(bulletArray.get(i).body);
+                bulletArray.remove(i--);
             }
         }
     }
