@@ -1,0 +1,27 @@
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.GameObject.hit()" because "objA" is null
+	at ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.ContactManager$1.beginContact(ContactManager.java:70)
+	at com.badlogic.gdx.physics.box2d.World.beginContact(World.java:1004)
+	at com.badlogic.gdx.physics.box2d.World.jniStep(Native Method)
+	at com.badlogic.gdx.physics.box2d.World.step(World.java:707)
+	at ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.Main.stepWorld(Main.java:78)
+	at ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.screens.GameScreen.render(GameScreen.java:165)
+	at com.badlogic.gdx.Game.render(Game.java:48)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	at ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.lwjgl3.Lwjgl3Launcher.createApplication(Lwjgl3Launcher.java:17)
+	at ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.lwjgl3.Lwjgl3Launcher.main(Lwjgl3Launcher.java:13)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':lwjgl3:run'.
+> Process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 26s
