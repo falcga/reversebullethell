@@ -6,14 +6,19 @@ import static ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSetti
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+<<<<<<< HEAD
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+=======
+import com.badlogic.gdx.graphics.OrthographicCamera;
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
+<<<<<<< HEAD
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.managers.AudioManager;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.screens.GameScreen;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.screens.MenuScreen;
@@ -37,11 +42,25 @@ public class Main extends Game {
     public SettingsScreen settingsScreen;
 
     float accumulator = 0;
+=======
+
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.screens.GameScreen;
+
+/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
+public class Main extends Game {
+
+    public SpriteBatch batch;
+    public OrthographicCamera camera;
+    public World world;
+    public Vector3 touch;
+
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 
     @Override
     public void create() {
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
+<<<<<<< HEAD
 
         largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
         commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
@@ -57,16 +76,31 @@ public class Main extends Game {
         settingsScreen = new SettingsScreen(this);
 
         setScreen(menuScreen);
+=======
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
+        GameScreen gameScreen = new GameScreen(this);
+        setScreen(gameScreen);
+
+
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
     }
 
     @Override
     public void dispose() {
         batch.dispose();
     }
+<<<<<<< HEAD
     
     public void stepWorld() {
         float delta = Gdx.graphics.getDeltaTime();
         accumulator += Math.min(delta, 0.25f);
+=======
+    public void stepWorld() {
+        float delta = Gdx.graphics.getDeltaTime();
+        float accumulator = delta;
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 
         if (accumulator >= STEP_TIME) {
             accumulator -= STEP_TIME;

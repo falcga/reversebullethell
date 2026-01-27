@@ -1,6 +1,7 @@
 package ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.screens;
 
 import com.badlogic.gdx.Gdx;
+<<<<<<< HEAD
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
@@ -96,16 +97,85 @@ public class GameScreen extends ScreenAdapter {
                 "Home"
         );
 
+=======
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.ScreenUtils;
+
+import java.util.ArrayList;
+
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.ContactManager;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameResources;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSession;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSettings;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.Main;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.BulletObject;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.ShipObject;
+import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.objects.TrashObject;
+
+public class GameScreen implements Screen {
+    GameSession gameSession;
+    Main main;
+    ShipObject shipObject;
+    ArrayList<TrashObject> trashArray;
+    ArrayList<BulletObject> bulletArray;
+    ContactManager contactManager;
+
+    public GameScreen(Main main) {
+        this.main = main;
+        gameSession = new GameSession();
+        contactManager = new ContactManager(main.world);
+
+        trashArray = new ArrayList<>();
+        bulletArray = new ArrayList<>();
+        shipObject = new ShipObject(
+            GameSettings.SCREEN_WIDTH / 2, 150,
+            GameSettings.SHIP_WIDTH, GameSettings.SHIP_HEIGHT,
+            GameResources.SHIP_IMG_PATH,
+            main.world
+        );
+
+        System.out.println("WHAT");
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
     }
 
     @Override
     public void show() {
+<<<<<<< HEAD
         restartGame();
+=======
+        gameSession.startGame();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void dispose() {
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
     }
 
     @Override
     public void render(float delta) {
 
+<<<<<<< HEAD
         handleInput();
 
         if (gameSession.state == GameState.PLAYING) {
@@ -193,6 +263,39 @@ public class GameScreen extends ScreenAdapter {
                     break;
             }
 
+=======
+        main.stepWorld();
+        handleInput();
+
+        if (gameSession.shouldSpawnTrash()) {
+            TrashObject trashObject = new TrashObject(
+                GameSettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT,
+                GameResources.TRASH_IMG_PATH,
+                main.world
+            );
+            trashArray.add(trashObject);
+        }
+
+        if (shipObject.needToShoot()) {
+            BulletObject laserBullet = new BulletObject(
+                shipObject.getX(), shipObject.getY() + shipObject.height / 2,
+                GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                GameResources.BULLET_IMG_PATH,
+                main.world
+            );
+            bulletArray.add(laserBullet);
+        }
+
+        updateTrash();
+        updateBullets();
+
+        draw();
+    }
+    private void handleInput() {
+        if (Gdx.input.isTouched()) {
+            main.touch = main.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+            shipObject.move(main.touch);
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
         }
     }
 
@@ -203,6 +306,7 @@ public class GameScreen extends ScreenAdapter {
         ScreenUtils.clear(Color.CLEAR);
 
         main.batch.begin();
+<<<<<<< HEAD
         backgroundView.draw(main.batch);
         for (ShipObject ship : shipArray) ship.draw(main.batch);
         trashObject.draw(main.batch);
@@ -318,6 +422,23 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateBullets() {
+=======
+        shipObject.draw(main.batch);
+        for (TrashObject trash : trashArray) trash.draw(main.batch);
+        for (BulletObject bullet : bulletArray) bullet.draw(main.batch);
+        main.batch.end();
+    }
+    private void updateTrash() {
+        for (int i = 0; i < trashArray.size(); i++) {
+            if (!trashArray.get(i).isInFrame()) {
+                main.world.destroyBody(trashArray.get(i).body);
+                trashArray.remove(i--);
+            }
+        }
+    }
+    private void updateBullets() {
+        System.out.println("size: " + bulletArray.size());
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
         for (int i = 0; i < bulletArray.size(); i++) {
             if (bulletArray.get(i).hasToBeDestroyed()) {
                 main.world.destroyBody(bulletArray.get(i).body);
@@ -325,6 +446,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }
     }
+<<<<<<< HEAD
 
     private void updateEnemyBullets() {
         for (int i = 0; i < enemyBulletArray.size(); i++) {
@@ -369,4 +491,6 @@ public class GameScreen extends ScreenAdapter {
         gameSession.startGame();
     }
 
+=======
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 }

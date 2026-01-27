@@ -1,6 +1,7 @@
 package ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell;
 
 public class GameResources {
+<<<<<<< HEAD
 
     public static final String BACKGROUND_IMG_PATH = "textures/background.png";
 
@@ -24,4 +25,9 @@ public class GameResources {
 
     public static final String FONT_PATH = "fonts/Montserrat-Bold.ttf";
 
+=======
+    public static final String SHIP_IMG_PATH = "textures/ship.png";
+    public static final String TRASH_IMG_PATH = "textures/trash.png";
+    public static final String BULLET_IMG_PATH = "textures/bullet.png";
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 }

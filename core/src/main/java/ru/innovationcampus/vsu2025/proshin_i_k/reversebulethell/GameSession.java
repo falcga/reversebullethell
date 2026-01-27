@@ -1,4 +1,5 @@
 package ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell;
+<<<<<<< HEAD
 import com.badlogic.gdx.utils.TimeUtils;
 import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.managers.MemoryManager;
 
@@ -13,11 +14,21 @@ public class GameSession {
     long pauseStartTime;
     private int score;
     int destroyedShipsNumber;
+=======
+
+import com.badlogic.gdx.utils.TimeUtils;
+
+public class GameSession {
+
+    long nextTrashSpawnTime;
+    long sessionStartTime;
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 
     public GameSession() {
     }
 
     public void startGame() {
+<<<<<<< HEAD
         state = GameState.PLAYING;
         score = 0;
         destroyedShipsNumber = 0;
@@ -67,12 +78,31 @@ public class GameSession {
         if (nextShipSpawnTime <= TimeUtils.millis()) {
             nextShipSpawnTime = TimeUtils.millis() + (long) (GameSettings.STARTING_SHIP_APPEARANCE_COOL_DOWN
                     * getShipPeriodCoolDown());
+=======
+        sessionStartTime = TimeUtils.millis();
+        nextTrashSpawnTime = sessionStartTime + (long) (GameSettings.STARTING_TRASH_APPEARANCE_COOL_DOWN
+            * getTrashPeriodCoolDown());
+    }
+
+
+    public boolean shouldSpawnTrash() {
+        if (nextTrashSpawnTime <= TimeUtils.millis()) {
+            nextTrashSpawnTime = TimeUtils.millis() + (long) (GameSettings.STARTING_TRASH_APPEARANCE_COOL_DOWN
+                * getTrashPeriodCoolDown());
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
             return true;
         }
         return false;
     }
 
+<<<<<<< HEAD
     private float getShipPeriodCoolDown() {
         return (float) Math.exp(-0.001 * (TimeUtils.millis() - sessionStartTime + 1) / 1000);
     }
+=======
+    private float getTrashPeriodCoolDown() {
+        return (float) Math.exp(-0.001 * (TimeUtils.millis() - sessionStartTime + 1) / 1000);
+    }
+
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 }

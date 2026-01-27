@@ -7,6 +7,7 @@ import ru.innovationcampus.vsu2025.proshin_i_k.reversebulethell.GameSettings;
 public class BulletObject extends GameObject {
 
     public boolean wasHit;
+<<<<<<< HEAD
     private boolean isEnemyBullet;
     private boolean destroyedShip;
 
@@ -38,12 +39,24 @@ public class BulletObject extends GameObject {
         } else {
             super.draw(batch);
         }
+=======
+
+    public BulletObject(int x, int y, int width, int height, String texturePath, World world) {
+        super(texturePath, x, y, width, height, world);
+        body.setLinearVelocity(new Vector2(0, GameSettings.BULLET_VELOCITY));
+        body.setBullet(true);
+    }
+
+    public boolean hasToBeDestroyed() {
+        return wasHit || (getY() - height / 2 > GameSettings.SCREEN_HEIGHT);
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
     }
 
     @Override
     public void hit() {
         wasHit = true;
     }
+<<<<<<< HEAD
 
     public void markShipDestroyed() {
         destroyedShip = true;
@@ -52,4 +65,6 @@ public class BulletObject extends GameObject {
     public boolean isEnemyBullet() {
         return isEnemyBullet;
     }
+=======
+>>>>>>> f85ea08e922905eb3281ceb08540506d20a8979e
 }
